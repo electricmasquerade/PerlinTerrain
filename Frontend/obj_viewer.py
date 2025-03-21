@@ -59,10 +59,10 @@ root = tk.Tk()
 root.title("Terrain Generator GUI")
 root.geometry("1200x1000")
 
-# Configure grid rows: row 0 for the canvas, row 1 for the controls
-root.grid_rowconfigure(0, weight=1)
-root.grid_rowconfigure(1, weight=0)
-root.grid_columnconfigure(0, weight=1)
+# Configure grid rows and columns for the root
+root.grid_rowconfigure(0, weight=1)  # Canvas row expands
+root.grid_rowconfigure(1, weight=0)  # Parameter row remains fixed
+root.grid_columnconfigure(0, weight=1)  # Single column expands
 
 # Create the canvas and place it in row 0
 fig = plt.figure(figsize=(6,6))
@@ -72,41 +72,41 @@ canvas.get_tk_widget().grid(row=0, column=0, sticky="nsew")
 
 # Create the parameter frame and place it in row 1
 param_frame = ttk.Frame(root)
-param_frame.grid(row=1, column=0, sticky="ew", pady=10)
+param_frame.grid(row=1, column=0, sticky="nsew", pady=10)
 
-# Now add your controls (sliders, buttons, etc.) to param_frame
-ttk.Label(param_frame, text="Resolution:").pack(side=tk.LEFT)
+# Configure grid weight in the parameter frame:
+# Assume we have, say, 8 columns (labels, sliders, and buttons) that we want to share space evenly.
+for i in range(8):
+    param_frame.grid_columnconfigure(i, weight=1)
+
+# Now add your controls using grid instead of pack
+ttk.Label(param_frame, text="Resolution:").grid(row=0, column=0, sticky="nsew", padx=5)
 res_slider = tk.Scale(param_frame, from_=20, to=200, orient=tk.HORIZONTAL)
 res_slider.set(25)
-res_slider.pack(side=tk.LEFT, padx=10)
+res_slider.grid(row=0, column=1, sticky="nsew", padx=5)
 
-# Frequency slider
-ttk.Label(param_frame, text="Frequency:").pack(side=tk.LEFT)
-freq_slider = tk.Scale(param_frame, from_= 1, to=50, orient=tk.HORIZONTAL)
+ttk.Label(param_frame, text="Frequency:").grid(row=0, column=2, sticky="nsew", padx=5)
+freq_slider = tk.Scale(param_frame, from_=1, to=50, orient=tk.HORIZONTAL)
 freq_slider.set(5)
-freq_slider.pack(side=tk.LEFT, padx=10)
+freq_slider.grid(row=0, column=3, sticky="nsew", padx=5)
 
-# Offset sliders for x and y
-ttk.Label(param_frame, text="X-Offset:").pack(side=tk.LEFT)
+ttk.Label(param_frame, text="X-Offset:").grid(row=0, column=4, sticky="nsew", padx=5)
 xoff_slider = tk.Scale(param_frame, from_=-10, to=10, orient=tk.HORIZONTAL)
 xoff_slider.set(0)
-xoff_slider.pack(side=tk.LEFT, padx=10)
+xoff_slider.grid(row=0, column=5, sticky="nsew", padx=5)
 
-ttk.Label(param_frame, text="Y-Offset:").pack(side=tk.LEFT)
+ttk.Label(param_frame, text="Y-Offset:").grid(row=0, column=6, sticky="nsew", padx=5)
 yoff_slider = tk.Scale(param_frame, from_=-10, to=10, orient=tk.HORIZONTAL)
 yoff_slider.set(0)
-yoff_slider.pack(side=tk.LEFT, padx=10)
+yoff_slider.grid(row=0, column=7, sticky="nsew", padx=5)
 
-# Add buttons to update plot and export OBJ
-
+# You can place the update and export buttons on a new row if desired.
 update_btn = ttk.Button(param_frame, text="Update Plot", command=update_plot)
-update_btn.pack(side=tk.LEFT, padx=10)
-
+update_btn.grid(row=1, column=0, columnspan=4, sticky="nsew", padx=5, pady=5)
 export_btn = ttk.Button(param_frame, text="Export OBJ", command=export_obj)
-export_btn.pack(side=tk.LEFT, padx=10)
+export_btn.grid(row=1, column=4, columnspan=4, sticky="nsew", padx=5, pady=5)
 
 export_status = ttk.Label(param_frame, text="")
-export_status.pack(side=tk.LEFT, padx=10)
-
+export_status.grid(row=2, column=0, columnspan=8, sticky="nsew", padx=5, pady=5)
 update_plot()
 root.mainloop()

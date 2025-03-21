@@ -118,6 +118,7 @@ void Terrain::writeToOBJ(const std::string &filename) const {
     }
 
     //write using OBJ file format
+
     //write vertices first
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
@@ -126,6 +127,8 @@ void Terrain::writeToOBJ(const std::string &filename) const {
                 << vertices[i][j].getY() << std::endl;
         }
     }
+
+
     //write quad faces next
     for (int i = 0; i < size - 1; i++) {
         for (int j = 0; j < size - 1; j++) {
