@@ -91,12 +91,12 @@ freq_slider.set(5)
 freq_slider.grid(row=0, column=3, sticky="nsew", padx=5)
 
 ttk.Label(param_frame, text="X-Offset:").grid(row=0, column=4, sticky="nsew", padx=5)
-xoff_slider = tk.Scale(param_frame, from_=-10, to=10, orient=tk.HORIZONTAL)
+xoff_slider = tk.Scale(param_frame, from_=-10, to=10, resolution=0.1, orient=tk.HORIZONTAL)
 xoff_slider.set(0)
 xoff_slider.grid(row=0, column=5, sticky="nsew", padx=5)
 
 ttk.Label(param_frame, text="Y-Offset:").grid(row=0, column=6, sticky="nsew", padx=5)
-yoff_slider = tk.Scale(param_frame, from_=-10, to=10, orient=tk.HORIZONTAL)
+yoff_slider = tk.Scale(param_frame, from_=-10, to=10, resolution=0.1 ,orient=tk.HORIZONTAL)
 yoff_slider.set(0)
 yoff_slider.grid(row=0, column=7, sticky="nsew", padx=5)
 
