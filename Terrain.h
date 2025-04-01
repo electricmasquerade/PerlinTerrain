@@ -21,7 +21,7 @@ public:
     void writeToCSV(const std::string& filename) const;
     void writeToOBJ(const std::string& filename) const;
 
-    void generateTerrain(double frequency, double xOffset, double yOffset); //use perlin class to generate noise
+    void generateTerrain(double frequency, double xOffset, double yOffset, int octaves, double persistence, double lacunarity); //use perlin class to generate noise
     void normalizeTerrain(); //normalize the terrain so that the highest point is 1 and the lowest point is -1, for all 3 axes
     void smoothTerrain(int iterations); //use laplacian smoothing to increase grid resolution without affecting scale
 

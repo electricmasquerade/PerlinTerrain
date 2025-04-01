@@ -24,14 +24,14 @@ Terrain::Terrain(const int size): size(size) {
     }
 }
 
-void Terrain::generateTerrain(const double frequency, double xOffset, double yOffset) {
+void Terrain::generateTerrain(const double frequency, const double xOffset, const double yOffset, const int octaves, const double persistence, double lacunarity) {
     //Use the perlin noise generator on each point to generate terrain
     Perlin perlin;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            double xInput = vertices[i][j].getX()*frequency + xOffset;
-            double yInput = vertices[i][j].getY()*frequency + yOffset;
-            const double noiseValue = perlin.generateNoise(xInput, yInput);
+            double xInput = vertices[i][j].getX() + xOffset;
+            double yInput = vertices[i][j].getY() + yOffset;
+            const double noiseValue = perlin.fractalNoise(frequency, xInput, yInput, octaves, persistence, lacunarity);
             vertices[i][j].setZ(noiseValue);
         }
     }

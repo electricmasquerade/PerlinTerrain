@@ -15,11 +15,14 @@ int main(int argc, char* argv[]) {
     const int resolution = std::stoi(argv[2]);
     const double xoffset = std::stod(argv[3]);
     const double yoffset = std::stod(argv[4]);
-    const int export_obj = std::stoi(argv[5]);
+    const int octaves = std::stoi(argv[5]);
+    const double persistence = std::stod(argv[6]);
+    const double lacunarity = std::stod(argv[7]);
+    const int export_obj = std::stoi(argv[8]);
     Terrain landscape(resolution);
     std::cout << "Terrain created with size " << landscape.getSize() << std::endl;
 
-    landscape.generateTerrain(frequency, xoffset, yoffset);
+    landscape.generateTerrain(frequency, xoffset, yoffset, octaves, persistence, lacunarity);
 
 
     landscape.writeToCSV("csvs/terrain.csv");

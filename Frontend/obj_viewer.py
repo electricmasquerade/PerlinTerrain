@@ -22,10 +22,14 @@ def update_plot():
     frequency = freq_slider.get()
     x_offset = xoff_slider.get()
     y_offset = yoff_slider.get()
+    octaves = octave_slider.get()
+    persistence = persistence_slider.get()
+    lacunarity = lacunarity_slider.get()
 
     # Call subprocess to generate terrain data
     exe_path = os.path.abspath("cmake-build-debug/Terrain")
-    cmd = [exe_path, str(frequency), str(resolution), str(x_offset), str(y_offset), str(0)]
+    cmd = [exe_path, str(frequency), str(resolution), str(x_offset), str(y_offset),
+           str(octaves), str(persistence), str(lacunarity) , str(1)]
     subprocess.run(cmd, check=True)
     # Generate terrain data (you can also incorporate frequency, offsets, etc.)
     x, y, z = generate_terrain_data(resolution)
@@ -45,10 +49,14 @@ def export_obj():
     frequency = freq_slider.get()
     x_offset = xoff_slider.get()
     y_offset = yoff_slider.get()
+    octaves = octave_slider.get()
+    persistence = persistence_slider.get()
+    lacunarity = lacunarity_slider.get()
 
     # Call subprocess to generate terrain data
     exe_path = os.path.abspath("cmake-build-debug/Terrain")
-    cmd = [exe_path, str(frequency), str(resolution), str(x_offset), str(y_offset), str(1)]
+    cmd = [exe_path, str(frequency), str(resolution), str(x_offset), str(y_offset),
+           str(octaves), str(persistence), str(lacunarity) , str(1)]
     subprocess.run(cmd, check=True)
     # Example: subprocess.run(["python", "export_obj.py"])
     # For demonstration purposes:
@@ -99,6 +107,21 @@ ttk.Label(param_frame, text="Y-Offset:").grid(row=0, column=6, sticky="nsew", pa
 yoff_slider = tk.Scale(param_frame, from_=-10, to=10, resolution=0.1 ,orient=tk.HORIZONTAL)
 yoff_slider.set(0)
 yoff_slider.grid(row=0, column=7, sticky="nsew", padx=5)
+
+ttk.Label(param_frame, text="Octaves").grid(row=0, column=8, sticky="nsew", padx=5)
+octave_slider = tk.Scale(param_frame, from_=1, to=10,orient=tk.HORIZONTAL)
+octave_slider.set(1)
+octave_slider.grid(row=0, column=9, sticky="nsew", padx=5)
+
+ttk.Label(param_frame, text="Persistence").grid(row=0, column=10, sticky="nsew", padx=5)
+persistence_slider = tk.Scale(param_frame, from_=0, to=1, resolution=0.1 ,orient=tk.HORIZONTAL)
+persistence_slider.set(0.5)
+persistence_slider.grid(row=0, column=11, sticky="nsew", padx=5)
+
+ttk.Label(param_frame, text="Lacunarity").grid(row=0, column=12, sticky="nsew", padx=5)
+lacunarity_slider = tk.Scale(param_frame, from_=1, to=3, resolution=0.1 ,orient=tk.HORIZONTAL)
+lacunarity_slider.set(2)
+lacunarity_slider.grid(row=0, column=13, sticky="nsew", padx=5)
 
 # You can place the update and export buttons on a new row if desired.
 update_btn = ttk.Button(param_frame, text="Update Plot", command=update_plot)
