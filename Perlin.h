@@ -18,7 +18,7 @@ public:
     std::vector<double> getGradient(double x, double y);
 
     double generateNoise(double x, double y);
-    double fractalNoise(double frequency, double x, double y, int octaves, double persistence, double lacunarity);
+    double fractalNoise(double inputFrequency, double x, double y, int octaves, double persistence, double lacunarity);
 
 private:
 

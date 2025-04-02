@@ -4,6 +4,7 @@
 
 #include <vector>
 #include "Vertex.h"
+#include <string>
 
 
 // Terrain class, which stores a 2D grid of vertices

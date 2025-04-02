@@ -75,20 +75,21 @@ double Perlin::generateNoise(double x, double y) {
 
 }
 
-double Perlin::fractalNoise(double frequency, double x, double y, int octaves, double persistence, double lacunarity) {
+double Perlin::fractalNoise(double inputFrequency, double x, double y, int octaves, double persistence, double lacunarity) {
     double total = 0;
     double amplitude = 1;
     double maxAmplitude = 0;
 
     for (int i = 0; i < octaves; i++) {
-        total += generateNoise(x * frequency, y * frequency) * amplitude;
+        total += generateNoise(x * inputFrequency, y * inputFrequency) * amplitude;
 
         maxAmplitude += amplitude;
 
         amplitude *= persistence;
-        frequency *= lacunarity;
+        inputFrequency *= lacunarity;
     }
-    std::cout << total << std::endl;
+    //For debugging purposes
+    //std::cout << total << std::endl;
     return total / maxAmplitude;
 }
 
