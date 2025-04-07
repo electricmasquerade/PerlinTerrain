@@ -12,8 +12,8 @@
 class Terrain {
 public:
     explicit Terrain(int size); //
-    int getSize() const {return size;}
-    const Vertex& getVertex(const int x, int y) const {return vertices[y][x];}
+    [[nodiscard]] int getSize() const {return size;}
+    [[nodiscard]] const Vertex& getVertex(const int x, int y) const {return vertices[y][x];}
     void setVertex(const int x, int y, const Vertex& v) {vertices[y][x] = v;}
 
 

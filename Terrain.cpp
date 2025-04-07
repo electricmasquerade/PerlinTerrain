@@ -29,8 +29,8 @@ void Terrain::generateTerrain(const double frequency, const double xOffset, cons
     Perlin perlin;
     for (int i = 0; i < size; i++) {
         for (int j = 0; j < size; j++) {
-            double xInput = vertices[i][j].getX() + xOffset;
-            double yInput = vertices[i][j].getY() + yOffset;
+            const double xInput = vertices[i][j].getX() + xOffset;
+            const double yInput = vertices[i][j].getY() + yOffset;
             const double noiseValue = perlin.fractalNoise(frequency, xInput, yInput, octaves, persistence, lacunarity);
             vertices[i][j].setZ(noiseValue);
         }

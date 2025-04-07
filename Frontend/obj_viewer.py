@@ -1,7 +1,6 @@
 import os.path
 import tkinter as tk
 from tkinter import ttk
-import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D  # required for 3D plotting
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
@@ -9,12 +8,12 @@ import subprocess
 import pandas as pd
 
 # Dummy function to simulate terrain data generation
-def generate_terrain_data(resolution):
+def generate_terrain_data():
     data = pd.read_csv('csvs/terrain.csv')
-    X = data['x']
-    Y = data['y']
-    Z = data['z']
-    return X, Y, Z
+    x = data['x']
+    y = data['y']
+    z = data['z']
+    return x, y, z
 
 def update_plot():
     # Get current resolution from slider
@@ -32,7 +31,7 @@ def update_plot():
            str(octaves), str(persistence), str(lacunarity) , str(1)]
     subprocess.run(cmd, check=True)
     # Generate terrain data (you can also incorporate frequency, offsets, etc.)
-    x, y, z = generate_terrain_data(resolution)
+    x, y, z = generate_terrain_data()
 
     # Clear the axes and re-plot
     ax.clear()

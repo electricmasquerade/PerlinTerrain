@@ -75,7 +75,8 @@ double Perlin::generateNoise(double x, double y) {
 
 }
 
-double Perlin::fractalNoise(double inputFrequency, double x, double y, int octaves, double persistence, double lacunarity) {
+double Perlin::fractalNoise(double inputFrequency, const double x, const double y, const int octaves,
+                            const double persistence, const double lacunarity) {
     double total = 0;
     double amplitude = 1;
     double maxAmplitude = 0;
